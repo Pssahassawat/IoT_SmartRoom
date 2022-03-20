@@ -1,0 +1,23 @@
+const int motionSensor = D1;
+const int motionLED = D7;
+
+void setup(){
+  Serial.begin(9600);
+
+  pinMode(motionLED, OUTPUT); //set port D7 as output to LED
+  pinMode(motionSensor, INPUT); //set port D1 as input from sensor
+}
+void loop(){
+  int sensorvalue = digitalRead(motionSensor); //The value read from sensor will stored in sensorvalue
+  Serial.println(sensorvalue);
+
+  if(sensorvalue == HIGH){
+    digitalWrite(motionLED , HIGH); //LED turn on when can detect movement
+    Serial.println("Detect movement!!");
+    delay(5000); //delay for 5 second. If can't detect any movement after this the LED will turn off
+  }
+  else{
+    digitalWrite(motionLED, LOW); //LED turn off when can't detect movement
+    Serial.println("can't detect movement!!");
+  }
+}
